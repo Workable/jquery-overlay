@@ -21,7 +21,10 @@ Each `strategy` MUST have `match` and `css` properties.
 ```js
 strategy = {
   match: matchObject,
-  css: cssObject
+  css: cssObject,
+  validate: function (term) {
+    // TODO...
+  }
 };
 ```
 

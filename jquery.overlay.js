@@ -201,6 +201,12 @@
                 break;
               }
               str = str[0];
+
+              // Validate term based on stragety options
+              if ($.isFunction(strategy.validate) && !strategy.validate(str)) {
+                break;
+              }
+
               html += escape(text.substr(prevIndex, match.lastIndex - prevIndex - str.length));
               html += '<span style="' + style + '">' + escape(str) + '</span>';
             };
