@@ -194,7 +194,7 @@
             if (this.nodeType != Node.TEXT_NODE) return;
             text = this.textContent;
             html = '';
-            for (prevIndex = match.lastIndex = 0;; prevIndex = match.lastIndex) {
+            for (prevIndex = match.lastIndex = 0;;) {
               str = match.exec(text);
               if (!str) {
                 if (prevIndex) html += escape(text.substr(prevIndex));
@@ -204,11 +204,12 @@
 
               // Validate term based on stragety options
               if ($.isFunction(strategy.validate) && !strategy.validate(str)) {
-                break;
+                continue;
               }
 
               html += escape(text.substr(prevIndex, match.lastIndex - prevIndex - str.length));
               html += '<span style="' + style + '">' + escape(str) + '</span>';
+              prevIndex = match.lastIndex;
             };
             if (prevIndex) $(this).replaceWith(html);
           });
